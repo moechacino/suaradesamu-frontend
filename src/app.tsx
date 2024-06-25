@@ -1,33 +1,27 @@
-import { useState } from 'preact/hooks'
-import preactLogo from './assets/preact.svg'
-import viteLogo from '/vite.svg'
-import './app.css'
+import { Router, Route, RouteProps, route } from "preact-router";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Login from "./view/admin/login";
+import Dashboard from "./view/admin/dashboard";
+import "./app.css";
+import InputCandidate from "./view/admin/inputCandidate";
+import InputVoter from "./view/admin/InputVoter";
+import AuthRoute from "./components/AuthRoutes";
 
 export function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://preactjs.com" target="_blank">
-          <img src={preactLogo} class="logo preact" alt="Preact logo" />
-        </a>
-      </div>
-      <h1>Vite + Preact</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/app.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p class="read-the-docs">
-        Click on the Vite and Preact logos to learn more
-      </p>
-    </>
-  )
+    <div style="background-color: #ECF8F7; height: 100% ; margin:0; min-height: 100vh; ">
+      <Router>
+        <Route path="/admin" component={Login} />
+
+        <AuthRoute path="/admin/dashboard" component={Dashboard} />
+
+        <AuthRoute
+          path="/admin/dashboard/input-candidate"
+          component={InputCandidate}
+        />
+
+        <AuthRoute path="/admin/dashboard/input-voter" component={InputVoter} />
+      </Router>
+    </div>
+  );
 }

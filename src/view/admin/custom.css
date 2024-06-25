@@ -1,0 +1,31 @@
+.btn-custom-tosca {
+  background-color: #00a58e;
+  color: #fff;
+  border-color: #00a58e;
+}
+.btn-custom-light-red {
+  background-color: #fcf3f3;
+  color: #fff;
+  border-color: #fcf3f3;
+}
+.btn-custom-light-red:hover {
+  background-color: #00a58e;
+  color: #fff;
+  border-color: #00a58e;
+}
+.btn-custom-red {
+  background-color: #d21c1c;
+  color: #fff;
+  border-color: #d21c1c;
+}
+.btn-custom-red:hover {
+  background-color: #970c0c;
+  color: #fff;
+  border-color: #970c0c;
+}
+
+.btn-custom-tosca:hover {
+  background-color: #007f6d;
+  color: #fff;
+  border-color: #007f6d;
+}
