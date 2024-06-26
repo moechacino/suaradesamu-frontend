@@ -28,7 +28,9 @@ export default function Login() {
       });
       const token = response.data.data.token;
       console.log(response.data);
-      Cookies.set("token", token);
+      Cookies.set("token", token, {
+        expires: new Date().getTime() + 30 * 60 * 100,
+      });
       route("/admin/dashboard", true);
     } catch (error: any) {
       if (error instanceof AxiosError) {

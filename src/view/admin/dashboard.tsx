@@ -14,6 +14,12 @@ import ChartComponent from "../../components/Chart";
 import { Votes } from "../../types/Votes";
 
 export default function Dashboard() {
+  function handleImageLoad() {
+    console.log("Loading Image");
+  }
+  function handleImageError() {
+    console.log("Error Loading Image");
+  }
   const [candidates, setCandidates] = useState([]);
   const [voters, setVoters] = useState([]);
   const [candidateTotalVotes, setCandidateTotalVotes] = useState([]);
@@ -105,6 +111,7 @@ export default function Dashboard() {
                   <thead>
                     <tr class="text-white">
                       <th scope="col">No Urut</th>
+                      <th scope="col">Photo</th>
                       <th scope="col">Nama</th>
                       <th scope="col">Umur</th>
                       <th scope="col">Pengalaman Organisasi</th>
@@ -118,6 +125,15 @@ export default function Dashboard() {
                       candidates.map((candidate: Candidate) => (
                         <tr key={candidate.id}>
                           <td>{candidate.noUrut}</td>
+                          <td>
+                            <img
+                              src={candidate.photoProfileUrl}
+                              alt={candidate.photoProfileAlt}
+                              style={{ width: "25px", height: "25px" }}
+                              onLoad={handleImageLoad}
+                              onError={handleImageError}
+                            />
+                          </td>
                           <td>{candidate.name}</td>
                           <td>{candidate.age}</td>
                           <td>
