@@ -1,4 +1,3 @@
-import { h } from "preact";
 import { route } from "preact-router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios, { AxiosError } from "axios";

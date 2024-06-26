@@ -1,4 +1,3 @@
-import { h } from "preact";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "../../components/Navbar";
 import { useEffect, useState } from "preact/hooks";
@@ -11,7 +10,6 @@ import {
 import { Candidate } from "../../types/candidate";
 import { Voter } from "../../types/Voter";
 import Cookies from "js-cookie";
-import Chart from "chart.js";
 import ChartComponent from "../../components/Chart";
 import { Votes } from "../../types/Votes";
 
@@ -117,7 +115,7 @@ export default function Dashboard() {
                   </thead>
                   <tbody>
                     {candidates && candidates.length > 0 ? (
-                      candidates.map((candidate: Candidate, index) => (
+                      candidates.map((candidate: Candidate) => (
                         <tr key={candidate.id}>
                           <td>{candidate.noUrut}</td>
                           <td>{candidate.name}</td>

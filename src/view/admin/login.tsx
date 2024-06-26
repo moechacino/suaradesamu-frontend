@@ -1,4 +1,3 @@
-import { AnyComponent, h } from "preact";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./custom.css";
 import axios, { AxiosError } from "axios";

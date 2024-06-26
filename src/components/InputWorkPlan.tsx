@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import Cookies from "js-cookie";
 
 import { API_CANDIDATE_GETALL, API_WORKPLAN_POST_CREATE } from "../env";

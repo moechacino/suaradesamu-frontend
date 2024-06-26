@@ -1,7 +1,7 @@
 import Chart from "chart.js/auto";
 import { useEffect, useRef } from "preact/hooks";
 import { Candidate } from "../types/candidate";
-import { ComponentProps } from "preact";
+
 interface ChartComponentProps {
   data: Candidate[];
 }

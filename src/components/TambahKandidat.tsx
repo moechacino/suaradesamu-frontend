@@ -1,5 +1,5 @@
 import { useState } from "preact/hooks";
-import Navbar from "./Navbar";
+
 import axios, { AxiosError } from "axios";
 import Cookies from "js-cookie";
 import { API_CANDIDATE_POST_CREATE } from "../env";

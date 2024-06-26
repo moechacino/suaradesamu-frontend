@@ -1,4 +1,4 @@
-import { Router, Route, RouteProps, route } from "preact-router";
+import { Router, Route } from "preact-router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./view/admin/login";
 import Dashboard from "./view/admin/dashboard";

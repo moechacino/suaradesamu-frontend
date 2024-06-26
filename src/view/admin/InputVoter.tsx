@@ -1,4 +1,3 @@
-import { h } from "preact";
 import { useState } from "preact/hooks";
 import Navbar from "../../components/Navbar";
 import Cookies from "js-cookie";

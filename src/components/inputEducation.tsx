@@ -1,13 +1,9 @@
 import { useEffect, useState } from "preact/hooks";
 
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import Cookies from "js-cookie";
 
-import {
-  API_CANDIDATE_GETALL,
-  API_EDUCATION_POST_CREATE,
-  API_WORKEXPERIENCE_POST_CREATE,
-} from "../env";
+import { API_CANDIDATE_GETALL, API_EDUCATION_POST_CREATE } from "../env";
 import { Candidate } from "../types/candidate";
 interface EducationFormData {
   degree: string;
