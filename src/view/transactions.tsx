@@ -1,13 +1,19 @@
 import { useState, useEffect } from "preact/hooks";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 import { Transaction, VotedEvent } from "../types/Transaction";
-import { API_TRANSACTIONS, API_TRANSACTIONS_VOTED } from "../env";
+import {
+  API_TRANSACTIONS,
+  API_TRANSACTIONS_VOTED,
+  API_VOTER_GETALL,
+  API_VOTING_GET_STATUS,
+} from "../env";
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [votedEvents, setVotedEvents] = useState<VotedEvent[]>([]);
   const [loading, setLoading] = useState(true);
+  const [doesVotingRun, setDoesVotingRun] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,13 +39,35 @@ const Transactions = () => {
         setLoading(false);
       }
     };
-
+    const fetchVotingStatus = async () => {
+      try {
+        const response = await axios.get(API_VOTING_GET_STATUS, {
+          headers: {
+            "ngrok-skip-browser-warning": true,
+          },
+        });
+        const data = response.data.data;
+        setDoesVotingRun(data.votingStatus);
+      } catch (error: any) {
+        if (error instanceof AxiosError) {
+          alert(error.response?.data.error);
+        } else {
+          alert(error.message);
+        }
+      }
+    };
     // Fetch data initially
-    fetchData();
+    fetchVotingStatus();
+    if (!doesVotingRun) {
+      fetchData();
+    }
 
     // Fetch data every 5 seconds
     const interval = setInterval(() => {
-      fetchData();
+      fetchVotingStatus();
+      if (!doesVotingRun) {
+        fetchData();
+      }
     }, 5000);
 
     // Clear interval on component unmount
@@ -76,50 +104,53 @@ const Transactions = () => {
               >
                 <h1>TRANSACTIONS</h1>
                 <div className="list-group">
-                  {transactions.map((transaction, index) => (
-                    <div
-                      key={index}
-                      className={`list-group-item ${
-                        index % 2 === 0 ? "bg-white" : "bg-custom"
-                      }`}
-                      style={{
-                        backgroundColor: index % 2 === 0 ? "white" : "#00a58e",
-                        color: index % 2 === 0 ? "black" : "white",
-                      }}
-                    >
-                      <h5>Block Number {transaction.blockNumber}</h5>
-                      <p>
-                        <strong>From:</strong> {transaction.from}
-                      </p>
-                      <p>
-                        <strong>To:</strong> {transaction.to}
-                      </p>
-                      <p>
-                        <strong>Value:</strong> {transaction.value}
-                      </p>
-                      <p>
-                        <strong>Gas:</strong> {transaction.gas}
-                      </p>
-                      <p>
-                        <strong>Gas Price:</strong> {transaction.gasPrice}
-                      </p>
-                      <p>
-                        <strong>Input:</strong>{" "}
-                        {JSON.stringify(transaction.input)}
-                      </p>
-                      <p>
-                        <strong>Contract Address:</strong>{" "}
-                        {transaction.contractAddress}
-                      </p>
-                      <p>
-                        <strong>Cumulative Gas Used:</strong>{" "}
-                        {transaction.cumulativeGasUsed}
-                      </p>
-                      <p>
-                        <strong>Gas Used:</strong> {transaction.gasUsed}
-                      </p>
-                    </div>
-                  ))}
+                  {doesVotingRun
+                    ? "Pemilihan Sedang Dilakukan. Tidak Bisa Menampilkan Data Transaksi"
+                    : transactions.map((transaction, index) => (
+                        <div
+                          key={index}
+                          className={`list-group-item ${
+                            index % 2 === 0 ? "bg-white" : "bg-custom"
+                          }`}
+                          style={{
+                            backgroundColor:
+                              index % 2 === 0 ? "white" : "#00a58e",
+                            color: index % 2 === 0 ? "black" : "white",
+                          }}
+                        >
+                          <h5>Block Number {transaction.blockNumber}</h5>
+                          <p>
+                            <strong>From:</strong> {transaction.from}
+                          </p>
+                          <p>
+                            <strong>To:</strong> {transaction.to}
+                          </p>
+                          <p>
+                            <strong>Value:</strong> {transaction.value}
+                          </p>
+                          <p>
+                            <strong>Gas:</strong> {transaction.gas}
+                          </p>
+                          <p>
+                            <strong>Gas Price:</strong> {transaction.gasPrice}
+                          </p>
+                          <p>
+                            <strong>Input:</strong>{" "}
+                            {JSON.stringify(transaction.input)}
+                          </p>
+                          <p>
+                            <strong>Contract Address:</strong>{" "}
+                            {transaction.contractAddress}
+                          </p>
+                          <p>
+                            <strong>Cumulative Gas Used:</strong>{" "}
+                            {transaction.cumulativeGasUsed}
+                          </p>
+                          <p>
+                            <strong>Gas Used:</strong> {transaction.gasUsed}
+                          </p>
+                        </div>
+                      ))}
                 </div>
               </div>
             </div>
@@ -130,43 +161,46 @@ const Transactions = () => {
               >
                 <h1>VOTED EVENTS</h1>
                 <div className="list-group">
-                  {votedEvents.map((event, index) => (
-                    <div
-                      key={index}
-                      className={`list-group-item ${
-                        index % 2 === 0 ? "bg-white" : "bg-custom"
-                      }`}
-                      style={{
-                        backgroundColor: index % 2 === 0 ? "white" : "#00a58e",
-                        color: index % 2 === 0 ? "black" : "white",
-                      }}
-                    >
-                      <h5>BlockNumber {event.blockNumber}</h5>
-                      <p>
-                        <strong>Contract Name:</strong> {event.contractName}
-                      </p>
-                      <p>
-                        <strong>Contract Address:</strong>{" "}
-                        {event.contractAddress}
-                      </p>
-                      <p>
-                        <strong>Signature:</strong> {event.signature}
-                      </p>
-                      <p>
-                        <strong>Transaction Hash:</strong> {event.txHash}
-                      </p>
-                      <p>
-                        <strong>Log Index:</strong> {event.logIndex}
-                      </p>
-                      <p>
-                        <strong>Voter:</strong> {event.returnValues.voter}
-                      </p>
-                      <p>
-                        <strong>Candidate ID:</strong>{" "}
-                        {event.returnValues.candidateId}
-                      </p>
-                    </div>
-                  ))}
+                  {doesVotingRun
+                    ? "Pemilihan Sedang Dilakukan. Tidak Dapat Menampilkan Data Pemilihan"
+                    : votedEvents.map((event, index) => (
+                        <div
+                          key={index}
+                          className={`list-group-item ${
+                            index % 2 === 0 ? "bg-white" : "bg-custom"
+                          }`}
+                          style={{
+                            backgroundColor:
+                              index % 2 === 0 ? "white" : "#00a58e",
+                            color: index % 2 === 0 ? "black" : "white",
+                          }}
+                        >
+                          <h5>BlockNumber {event.blockNumber}</h5>
+                          <p>
+                            <strong>Contract Name:</strong> {event.contractName}
+                          </p>
+                          <p>
+                            <strong>Contract Address:</strong>{" "}
+                            {event.contractAddress}
+                          </p>
+                          <p>
+                            <strong>Signature:</strong> {event.signature}
+                          </p>
+                          <p>
+                            <strong>Transaction Hash:</strong> {event.txHash}
+                          </p>
+                          <p>
+                            <strong>Log Index:</strong> {event.logIndex}
+                          </p>
+                          <p>
+                            <strong>Voter:</strong> {event.returnValues.voter}
+                          </p>
+                          <p>
+                            <strong>Candidate ID:</strong>{" "}
+                            {event.returnValues.candidateId}
+                          </p>
+                        </div>
+                      ))}
                 </div>
               </div>
             </div>
