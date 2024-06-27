@@ -5,7 +5,6 @@ import { Transaction, VotedEvent } from "../types/Transaction";
 import {
   API_TRANSACTIONS,
   API_TRANSACTIONS_VOTED,
-  API_VOTER_GETALL,
   API_VOTING_GET_STATUS,
 } from "../env";
 
