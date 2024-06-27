@@ -46,7 +46,8 @@ const Transactions = () => {
           },
         });
         const data = response.data.data;
-        setDoesVotingRun(data.votingStatus);
+        const votingStatus = data.votingStatus;
+        setDoesVotingRun(votingStatus);
       } catch (error: any) {
         if (error instanceof AxiosError) {
           alert(error.response?.data.error);
