@@ -34,8 +34,6 @@ const Transactions = () => {
         setVotedEvents(votedEventsResponse.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
       }
     };
     const fetchVotingStatus = async () => {
@@ -57,17 +55,27 @@ const Transactions = () => {
       }
     };
     // Fetch data initially
-    fetchVotingStatus();
-    if (!doesVotingRun) {
-      fetchData();
-    }
+    const fetchAll = async () => {
+      try {
+        await fetchVotingStatus();
+        if (!doesVotingRun) {
+          await fetchData();
+        }
+      } catch (error: any) {
+        if (error instanceof AxiosError) {
+          alert(error.response?.data.error);
+        } else {
+          alert(error.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    fetchAll();
     // Fetch data every 5 seconds
     const interval = setInterval(() => {
-      fetchVotingStatus();
-      if (!doesVotingRun) {
-        fetchData();
-      }
+      fetchAll();
     }, 5000);
 
     // Clear interval on component unmount

@@ -15,7 +15,6 @@ export function App() {
         <Route path="/" component={Transactions} />
         <Route path="/admin" component={Login} />
 
-        {/* ONLY ADMIN */}
         <AuthRoute path="/admin/dashboard" component={Dashboard} />
 
         <AuthRoute
