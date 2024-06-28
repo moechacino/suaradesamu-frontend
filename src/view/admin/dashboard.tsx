@@ -114,6 +114,7 @@ export default function Dashboard() {
                       <th scope="col">Photo</th>
                       <th scope="col">Nama</th>
                       <th scope="col">Umur</th>
+                      <th scope="col">Visi</th>
                       <th scope="col">Pengalaman Organisasi</th>
                       <th scope="col">Pengalaman Kerja</th>
                       <th scope="col">Program Kerja</th>
@@ -130,12 +131,14 @@ export default function Dashboard() {
                               src={candidate.photoProfileUrl}
                               alt={candidate.photoProfileAlt}
                               style={{ width: "25px", height: "25px" }}
+                              loading="eager"
                               onLoad={handleImageLoad}
                               onError={handleImageError}
                             />
                           </td>
                           <td>{candidate.name}</td>
                           <td>{candidate.age}</td>
+                          <td>{candidate.visi}</td>
                           <td>
                             {candidate.organization &&
                             candidate.organization.length > 0

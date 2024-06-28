@@ -3,6 +3,7 @@ export type Candidate = {
   name: string;
   age: number;
   noUrut: number;
+  visi: string;
   photoProfileUrl: string;
   photoProfileAlt: string;
   workPlan?: WorkPlan[] | null;

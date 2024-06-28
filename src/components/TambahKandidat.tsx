@@ -7,6 +7,7 @@ interface CandidateFormData {
   noUrut: string;
   name: string;
   age: string;
+  visi: string;
   file: File | null;
 }
 export default function TambahKandidat() {
@@ -15,6 +16,7 @@ export default function TambahKandidat() {
     noUrut: "",
     name: "",
     age: "",
+    visi: "",
     file: null,
   });
   const [error, setError] = useState("");
@@ -78,6 +80,7 @@ export default function TambahKandidat() {
         noUrut: "",
         name: "",
         age: "",
+        visi: "",
         file: null,
       });
       setError("");
@@ -136,6 +139,19 @@ export default function TambahKandidat() {
               className="form-control"
               id="age"
               value={formData.age}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="visi" className="form-label">
+              Visi
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="visi"
+              value={formData.visi}
               onChange={handleInputChange}
               required
             />
