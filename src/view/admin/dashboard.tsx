@@ -126,8 +126,8 @@ export default function Dashboard() {
                             <CandidateImage
                               photoProfileUrl={candidate.photoProfileUrl}
                               photoProfileAlt={candidate.photoProfileAlt}
-                              width="30"
-                              height="30"
+                              width="30px"
+                              height="30px"
                             />
                           </td>
                           <td>{candidate.name}</td>
