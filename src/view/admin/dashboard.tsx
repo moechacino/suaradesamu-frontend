@@ -28,13 +28,7 @@ export default function Dashboard() {
     return `${year}-${month}-${day}`;
   }
   const token = Cookies.get("token");
-  async function fetchImage(src: string) {
-    const image = await axios.get(src, {
-      headers: {
-        "ngrok-skip-browser-warning": true,
-      },
-    });
-  }
+
   useEffect(() => {
     const fetchCandidates = async () => {
       try {
