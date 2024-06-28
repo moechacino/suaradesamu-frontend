@@ -15,12 +15,6 @@ import { Votes } from "../../types/Votes";
 import CandidateImage from "../../components/CandidateImage";
 
 export default function Dashboard() {
-  function handleImageLoad() {
-    console.log("Loading Image");
-  }
-  function handleImageError() {
-    console.log("Error Loading Image");
-  }
   const [candidates, setCandidates] = useState([]);
   const [voters, setVoters] = useState([]);
   const [candidateTotalVotes, setCandidateTotalVotes] = useState([]);
