@@ -12,6 +12,7 @@ import { Voter } from "../../types/Voter";
 import Cookies from "js-cookie";
 import ChartComponent from "../../components/Chart";
 import { Votes } from "../../types/Votes";
+import CandidateImage from "../../components/CandidateImage";
 
 export default function Dashboard() {
   function handleImageLoad() {
@@ -33,6 +34,13 @@ export default function Dashboard() {
     return `${year}-${month}-${day}`;
   }
   const token = Cookies.get("token");
+  async function fetchImage(src: string) {
+    const image = await axios.get(src, {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+      },
+    });
+  }
   useEffect(() => {
     const fetchCandidates = async () => {
       try {
@@ -127,13 +135,11 @@ export default function Dashboard() {
                         <tr key={candidate.id}>
                           <td>{candidate.noUrut}</td>
                           <td>
-                            <img
-                              src={candidate.photoProfileUrl}
-                              alt={candidate.photoProfileAlt}
-                              style={{ width: "25px", height: "25px" }}
-                              loading="eager"
-                              onLoad={handleImageLoad}
-                              onError={handleImageError}
+                            <CandidateImage
+                              photoProfileUrl={candidate.photoProfileUrl}
+                              photoProfileAlt={candidate.photoProfileAlt}
+                              width="30"
+                              height="30"
                             />
                           </td>
                           <td>{candidate.name}</td>
