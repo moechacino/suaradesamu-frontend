@@ -56,6 +56,7 @@ export default function TambahKandidat() {
     formDataToSend.append("noUrut", formData.noUrut);
     formDataToSend.append("name", formData.name);
     formDataToSend.append("age", formData.age);
+    formDataToSend.append("visi", formData.visi);
     if (formData.file) {
       formDataToSend.append("file", formData.file);
     }
