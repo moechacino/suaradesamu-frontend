@@ -20,13 +20,6 @@ export default function Dashboard() {
   const [candidateTotalVotes, setCandidateTotalVotes] = useState([]);
   const [realCount, setRealCount] = useState<Votes | null>(null);
 
-  function getDate(dateIso: Date) {
-    const date = new Date(dateIso);
-    const year = date.getFullYear();
-    let month = (date.getMonth() + 1).toString().padStart(2, "0");
-    let day = date.getDate().toString().padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  }
   const token = Cookies.get("token");
 
   useEffect(() => {
@@ -144,10 +137,7 @@ export default function Dashboard() {
                                       </h6>
                                     </div>
                                     <div>
-                                      {getDate(org.periodStart)}-
-                                      {org.periodEnd !== null
-                                        ? getDate(org.periodEnd)
-                                        : "Now"}
+                                      {org.periodStart}-{org.periodEnd}
                                     </div>
                                   </div>
                                 ))
@@ -164,10 +154,7 @@ export default function Dashboard() {
                                       </h6>
                                     </div>
                                     <div>
-                                      {getDate(exp.periodStart)}-
-                                      {exp.periodEnd !== null
-                                        ? getDate(exp.periodEnd)
-                                        : "Now"}
+                                      {exp.periodStart}-{exp.periodEnd}
                                     </div>
                                   </div>
                                 ))
@@ -203,10 +190,7 @@ export default function Dashboard() {
                                       <h6>{edu.institution}</h6>
                                     </div>
                                     <div>
-                                      {getDate(edu.periodStart)}-
-                                      {edu.periodEnd !== null
-                                        ? getDate(edu.periodEnd)
-                                        : "Now"}
+                                      {edu.periodStart}-{edu.periodEnd}
                                     </div>
                                   </div>
                                 ))
