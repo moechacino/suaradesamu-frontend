@@ -110,6 +110,56 @@ const Transactions = () => {
                 className="card shadow-none mt-1 text-center"
                 style={{ backgroundColor: "#ECF8F7", width: "100%" }}
               >
+                <h1>VOTED EVENTS</h1>
+                <div className="list-group">
+                  {doesVotingRun
+                    ? "Pemilihan Sedang Dilakukan. Tidak Dapat Menampilkan Data Pemilihan"
+                    : votedEvents.map((event, index) => (
+                        <div
+                          key={index}
+                          className={`list-group-item ${
+                            index % 2 === 0 ? "bg-white" : "bg-custom"
+                          }`}
+                          style={{
+                            backgroundColor:
+                              index % 2 === 0 ? "white" : "#00a58e",
+                            color: index % 2 === 0 ? "black" : "white",
+                          }}
+                        >
+                          <h5>BlockNumber {event.blockNumber}</h5>
+                          <p>
+                            <strong>Contract Name:</strong> {event.contractName}
+                          </p>
+                          <p>
+                            <strong>Contract Address:</strong>{" "}
+                            {event.contractAddress}
+                          </p>
+                          <p>
+                            <strong>Signature:</strong> {event.signature}
+                          </p>
+                          <p>
+                            <strong>Transaction Hash:</strong> {event.txHash}
+                          </p>
+                          <p>
+                            <strong>Log Index:</strong> {event.logIndex}
+                          </p>
+                          <p>
+                            <strong>Voter:</strong> {event.returnValues.voter}
+                          </p>
+                          <p>
+                            <strong>Candidate ID:</strong>{" "}
+                            {event.returnValues.candidateId}
+                          </p>
+                        </div>
+                      ))}
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div
+                className="card shadow-none mt-1 text-center"
+                style={{ backgroundColor: "#ECF8F7", width: "100%" }}
+              >
                 <h1>TRANSACTIONS</h1>
                 <div className="list-group">
                   {doesVotingRun
@@ -156,56 +206,6 @@ const Transactions = () => {
                           </p>
                           <p>
                             <strong>Gas Used:</strong> {transaction.gasUsed}
-                          </p>
-                        </div>
-                      ))}
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div
-                className="card shadow-none mt-1 text-center"
-                style={{ backgroundColor: "#ECF8F7", width: "100%" }}
-              >
-                <h1>VOTED EVENTS</h1>
-                <div className="list-group">
-                  {doesVotingRun
-                    ? "Pemilihan Sedang Dilakukan. Tidak Dapat Menampilkan Data Pemilihan"
-                    : votedEvents.map((event, index) => (
-                        <div
-                          key={index}
-                          className={`list-group-item ${
-                            index % 2 === 0 ? "bg-white" : "bg-custom"
-                          }`}
-                          style={{
-                            backgroundColor:
-                              index % 2 === 0 ? "white" : "#00a58e",
-                            color: index % 2 === 0 ? "black" : "white",
-                          }}
-                        >
-                          <h5>BlockNumber {event.blockNumber}</h5>
-                          <p>
-                            <strong>Contract Name:</strong> {event.contractName}
-                          </p>
-                          <p>
-                            <strong>Contract Address:</strong>{" "}
-                            {event.contractAddress}
-                          </p>
-                          <p>
-                            <strong>Signature:</strong> {event.signature}
-                          </p>
-                          <p>
-                            <strong>Transaction Hash:</strong> {event.txHash}
-                          </p>
-                          <p>
-                            <strong>Log Index:</strong> {event.logIndex}
-                          </p>
-                          <p>
-                            <strong>Voter:</strong> {event.returnValues.voter}
-                          </p>
-                          <p>
-                            <strong>Candidate ID:</strong>{" "}
-                            {event.returnValues.candidateId}
                           </p>
                         </div>
                       ))}
