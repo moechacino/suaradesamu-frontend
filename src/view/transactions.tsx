@@ -110,7 +110,7 @@ const Transactions = () => {
                 className="card shadow-none mt-1 text-center"
                 style={{ backgroundColor: "#ECF8F7", width: "100%" }}
               >
-                <h1>VOTED EVENTS</h1>
+                <h1>VOTING EVENTS</h1>
                 <div className="list-group">
                   {doesVotingRun
                     ? "Pemilihan Sedang Dilakukan. Tidak Dapat Menampilkan Data Pemilihan"
@@ -127,6 +127,10 @@ const Transactions = () => {
                           }}
                         >
                           <h5>BlockNumber {event.blockNumber}</h5>
+                          <p>
+                            <strong>Date: </strong>
+                            {event.date}
+                          </p>
                           <p>
                             <strong>Contract Name:</strong> {event.contractName}
                           </p>
@@ -177,6 +181,10 @@ const Transactions = () => {
                           }}
                         >
                           <h5>Block Number {transaction.blockNumber}</h5>
+                          <p>
+                            <strong>Date: </strong>
+                            {transaction.date}
+                          </p>
                           <p>
                             <strong>From:</strong> {transaction.from}
                           </p>

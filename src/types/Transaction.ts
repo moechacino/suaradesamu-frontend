@@ -9,10 +9,12 @@ export interface Transaction {
   cumulativeGasUsed: string;
   gasUsed: string;
   blockNumber: number;
+  date: Date;
 }
 
 export interface VotedEvent {
   blockNumber: number;
+  date: Date;
   contractName: string;
   contractAddress: string;
   signature: string;
