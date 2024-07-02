@@ -92,7 +92,6 @@ export default function TambahCredibility() {
 
   return (
     <div style={{ backgroundColor: "#ECF8F7", minHeight: "100vh" }}>
-      <Navbar />
       <section className="pb-5 d-flex justify-content-center align-items-center">
         <div
           className="card shadow-none mt-5"
