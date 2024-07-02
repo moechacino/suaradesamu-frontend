@@ -43,7 +43,7 @@ export default function Dashboard() {
           },
         });
         const data = response.data.data;
-        setCandidateTotalVotes(data.candidateVotesCount);
+        setCandidateTotalVotes(data.candidateVotesData);
         setRealCount(data);
       } catch (error: any) {
         if (error instanceof AxiosError) {
