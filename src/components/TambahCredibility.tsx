@@ -4,7 +4,6 @@ import axios, { AxiosError } from "axios";
 import { API_CANDIDATE_GETALL, API_CREDIBILITY } from "../env";
 import { Candidate } from "../types/candidate";
 import Cookies from "js-cookie";
-import Navbar from "./Navbar";
 
 export default function TambahCredibility() {
   const [candidates, setCandidates] = useState<Candidate[]>([]);
