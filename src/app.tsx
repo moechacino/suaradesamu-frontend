@@ -7,6 +7,7 @@ import InputCandidate from "./view/admin/inputCandidate";
 import InputVoter from "./view/admin/InputVoter";
 import AuthRoute from "./components/AuthRoutes";
 import Transactions from "./view/transactions";
+import InputCredibility from "./view/admin/inputCredibility";
 
 export function App() {
   return (
@@ -22,6 +23,10 @@ export function App() {
           component={InputCandidate}
         />
 
+        <AuthRoute
+          path="/admin/dashboard/input-credibility"
+          component={InputCredibility}
+        />
         <AuthRoute path="/admin/dashboard/input-voter" component={InputVoter} />
       </Router>
     </div>

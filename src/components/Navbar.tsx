@@ -91,6 +91,9 @@ export default function Navbar() {
   function navigateToInputVoter() {
     route("/admin/dashboard/input-voter");
   }
+  function naviagateToInputCredibility() {
+    route("/admin/dashboard/input-credibility");
+  }
   return (
     <>
       <section class="d-flex justify-content-center align-items-center">
@@ -127,6 +130,14 @@ export default function Navbar() {
                   class="btn btn-custom-tosca py-3 px-5"
                 >
                   INPUT KANDIDAT
+                </button>
+              </div>
+              <div class="col d-flex justify-content-center">
+                <button
+                  onClick={naviagateToInputCredibility}
+                  class="btn btn-custom-tosca py-3 px-5"
+                >
+                  KREDIBILITAS KANDIDAT
                 </button>
               </div>
               <div class="col d-flex justify-content-center">

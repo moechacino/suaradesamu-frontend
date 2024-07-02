@@ -16,3 +16,4 @@ export const API_VOTER_POST_CREATE_BULK = `${API_ORIGIN}/voter/bulk`;
 export const API_TRANSACTIONS = `${API_ORIGIN}/transactions`;
 export const API_TRANSACTIONS_VOTED = `${API_ORIGIN}/transactions/voted`;
 export const API_VOTING_GET_STATUS = `${API_ORIGIN}/voting/status`;
+export const API_CREDIBILITY = `${API_ORIGIN}/candidate/credibility-sentiment`;

@@ -2,25 +2,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "../../components/Navbar";
 import { useEffect, useState } from "preact/hooks";
 import axios, { AxiosError } from "axios";
-import {
-  API_CANDIDATE_GETALL,
-  API_VOTER_GETALL,
-  API_VOTES_GETALL,
-} from "../../env";
+import { API_CANDIDATE_GETALL, API_VOTES_GETALL } from "../../env";
 import { Candidate } from "../../types/candidate";
-import { Voter } from "../../types/Voter";
-import Cookies from "js-cookie";
+
 import ChartComponent from "../../components/Chart";
 import { Votes } from "../../types/Votes";
 import CandidateImage from "../../components/CandidateImage";
 
 export default function Dashboard() {
   const [candidates, setCandidates] = useState([]);
-  const [voters, setVoters] = useState([]);
+
   const [candidateTotalVotes, setCandidateTotalVotes] = useState([]);
   const [realCount, setRealCount] = useState<Votes | null>(null);
-
-  const token = Cookies.get("token");
 
   useEffect(() => {
     const fetchCandidates = async () => {
@@ -33,25 +26,6 @@ export default function Dashboard() {
         console.log(response.data);
         const data = response.data.data;
         setCandidates(data);
-      } catch (error: any) {
-        if (error instanceof AxiosError) {
-          alert(error.response?.data.error);
-        } else {
-          alert(error.message);
-        }
-      }
-    };
-
-    const fetchVoters = async () => {
-      try {
-        const response = await axios.get(API_VOTER_GETALL, {
-          headers: {
-            "ngrok-skip-browser-warning": true,
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = response.data.data;
-        setVoters(data);
       } catch (error: any) {
         if (error instanceof AxiosError) {
           alert(error.response?.data.error);
@@ -81,7 +55,6 @@ export default function Dashboard() {
     };
     fetchRealCount();
     fetchCandidates();
-    fetchVoters();
   }, []);
 
   return (
@@ -208,6 +181,8 @@ export default function Dashboard() {
                   </tbody>
                 </table>
               </div>
+            </div>
+            <div class="col">
               <div class="col">
                 <section className="d-flex justify-content-center align-items-center">
                   <div
@@ -263,39 +238,6 @@ export default function Dashboard() {
                     </div>
                   </div>
                 </section>
-              </div>
-            </div>
-            <div class="col">
-              <div class="container text-center mt-3 mb-3">
-                <h2 class="mt-3">Daftar Pemilih</h2>
-                <table class="table table-success" style="width: 100%;">
-                  <thead>
-                    <tr class="text-white">
-                      <th scope="col">#</th>
-                      <th scope="col">Serial Number</th>
-                      <th scope="col">NIK</th>
-                      <th scope="col">Nama</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {voters && voters.length > 0 ? (
-                      voters.map((voter: Voter, index) => (
-                        <tr key={index}>
-                          <td>{index + 1}</td>
-                          <td>{voter.nfcSerialNumber}</td>
-                          <td>{voter.NIK}</td>
-                          <td>{voter.name}</td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan={7} class="text-center">
-                          Loading...
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
               </div>
             </div>
           </div>
